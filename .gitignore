@@ -1,0 +1,17 @@
+# Arquivos de Cache do Python
+__pycache__/
+*.pyc
+
+# Pastas de ambiente virtual
+venv/
+.venv/
+env/
+.env/
+
+# Arquivos de configuração de IDEs (opcional, mas recomendado)
+.vscode/
+.idea/
+
+# Arquivos de dependências do sistema operacional
+.DS_Store
+Thumbs.db
