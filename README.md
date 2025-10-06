@@ -37,28 +37,40 @@ O simulador implementa os seguintes conceitos:
 ## Possíveis Aprimoramentos
 
 ### Interface Gráfica
-[] - Alterar cores dos processos de acordo com estado
-[] - Alterar interface dos dispositivos para aumentar a legibilidade
-[] - Inserir cores nas variáveis de memória para visualizar page hits, substituições e inserções
-[] - Permitir visualização das Tabeles de Páginas dos processos
-[] - Permitir visualização da fila de processos que querem acessas um dispositivo
-[] - Aumentar o tamanho dos widgets para evitar o redimensionamento
+[ ] - Alterar cores dos processos de acordo com estado
+
+[ ] - Alterar interface dos dispositivos para aumentar a legibilidade
+
+[ ] - Inserir cores nas variáveis de memória para visualizar page hits, substituições e inserções
+
+[ ] - Permitir visualização das Tabeles de Páginas dos processos
+
+[ ] - Permitir visualização da fila de processos que querem acessas um dispositivo
+
+[ ] - Aumentar o tamanho dos widgets para evitar o redimensionamento
 
 ### Escalonador
-[] - Adicionar demais algoritmos de escalonamento
+[ ] - Adicionar demais algoritmos de escalonamento
 
 ### Memória
-[] - Adicionar integração com as variáveis de memória máxima
-[] - Adicionar integração com máximo de alocação por processo
-[] - Adicionar outras políticas
+[ ] - Adicionar integração com as variáveis de memória máxima
+
+[ ] - Adicionar integração com máximo de alocação por processo
+
+[ ] - Adicionar outras políticas
 
 ### Gerador Entrada
-[] - Verificar variáveis de memória para serem multiplos de 2
+[ ] - Verificar variáveis de memória para serem multiplos de 2
 
 ### Documentação
-[] - Escalonador
-[] - Main
-[] - Device
-[] - DeviceManager
-[] - MemoryManager
-[] - Process
+[ ] - Escalonador
+
+[ ] - Main
+
+[ ] - Device
+
+[ ] - DeviceManager
+
+[ ] - MemoryManager
+
+[ ] - Process
