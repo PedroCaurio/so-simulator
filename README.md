@@ -13,7 +13,7 @@ O simulador implementa os seguintes conceitos:
 
 1.  **Clone o repositório:**
     ```bash
-    git clone 
+    git clone https://github.com/PedroCaurio/so-simulator
     ```
 2.  **Instale as dependências:**
     ```bash
@@ -33,3 +33,32 @@ O simulador implementa os seguintes conceitos:
 - `/src`: Contém a lógica principal do simulador (Escalonador, Processos, Memória).
 - `/UI`: Contém os arquivos da interface gráfica desenvolvida com PyQt6.
 - `main.py`: Ponto de entrada da aplicação.
+
+## Possíveis Aprimoramentos
+
+### Interface Gráfica
+[] - Alterar cores dos processos de acordo com estado
+[] - Alterar interface dos dispositivos para aumentar a legibilidade
+[] - Inserir cores nas variáveis de memória para visualizar page hits, substituições e inserções
+[] - Permitir visualização das Tabeles de Páginas dos processos
+[] - Permitir visualização da fila de processos que querem acessas um dispositivo
+[] - Aumentar o tamanho dos widgets para evitar o redimensionamento
+
+### Escalonador
+[] - Adicionar demais algoritmos de escalonamento
+
+### Memória
+[] - Adicionar integração com as variáveis de memória máxima
+[] - Adicionar integração com máximo de alocação por processo
+[] - Adicionar outras políticas
+
+### Gerador Entrada
+[] - Verificar variáveis de memória para serem multiplos de 2
+
+### Documentação
+[] - Escalonador
+[] - Main
+[] - Device
+[] - DeviceManager
+[] - MemoryManager
+[] - Process
