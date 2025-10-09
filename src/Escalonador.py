@@ -22,10 +22,6 @@ class Escalonador:                  #Criação do objeto Escalonador
         self.DevManager = DeviceManager()
 
     def initialize(self): # Lê o arquivo de entrada e cria todos componentes necessários
-        """ - políticaMemória indica se o algoritmo de substituição de página deverá tomar decisões de forma local ou global.
-    - tamanhoMemória informa o tamanho da memória principal em bytes
-    - tamanhoPáginasMolduras define o tamanho em bytes das páginas e molduras
-    - percentualAlocação estabelece o percentual máximo de memória (em relação ao tamanho da sua memória virtual) que um processo terá na memória principal"""
         self.alg, self.frac,self.politic, self.memSize, self.framePageSize, self.alocPerc, self.numDevices = self.infos[0].split("|") 
         self.numDevices = int(self.numDevices)
         self.frac = int(self.frac)
