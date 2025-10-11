@@ -2,6 +2,10 @@ from collections import deque
 
 class MemoryManager:
     def __init__(self, memory_total, page_frame_size, politic):
+        '''
+            Classe responsável por fazer o gerenciamento da memória física
+        '''
+
         # POLITICA DE SUBSTITUIÇÃO
         self.scope = politic
         self.queue_fifo_global = deque()
@@ -11,11 +15,15 @@ class MemoryManager:
         self.memory = int(memory_total)
         self.page_frame_size = int(page_frame_size)
         self.num_frames = self.memory // self.page_frame_size
-        print(f"Número total de frames: {self.num_frames}")
         self.frames = [None] * self.num_frames
+
+        
 
     
     def page_alloc(self, process, page_number) -> bool:
+        '''
+            Função principal que faz alocação da página de um processo para uma moldura.
+        '''
         # CASO 1: PÁGINA ESTÁ EM UMA MOLDURA - HIT PAGE
         page = (process.pid, page_number)
         if page in self.frames:
@@ -40,9 +48,10 @@ class MemoryManager:
         return getattr(self, self.politic)(process, page)
         
     def FIFO(self, process, page) -> bool:
-        
-    
-        
+        '''
+            Algoritmo de substituição de página First-in First-out. Escolhe a página que será substituida baseado nos deques
+            do memory manager, se for global, ou dos processos, se for local.
+        '''
         if self.scope == "Global" and self.queue_fifo_global:
             page_to_remove = self.queue_fifo_global.popleft()
             frame_idx = self.frames.index(page_to_remove)
@@ -51,10 +60,13 @@ class MemoryManager:
             self.queue_fifo_global.append(page)
             process.pages_table[page[1]] = frame_idx
             return True
-        if self.scope == "Local" and process.queue_fifo:
+        elif self.scope == "Local" and process.queue_fifo:
             page_to_remove = process.queue_fifo.popleft()
             frame_idx = self.frames.index(page_to_remove)
             self.frames[frame_idx] = page
 
             process.queue_fifo.append(page)
             process.pages_table[page[1]] = frame_idx
+            return True
+        return False
+        

@@ -7,6 +7,10 @@ from collections import deque
 
 class Escalonador:                  #Criação do objeto Escalonador
     def __init__(self, infos):      
+        '''
+            Classe principal do Simulador, o escalonador instancia os gerenciadores de memória e de dispositivos
+            além de fazer todo controle dos processos
+        '''
         self.infos = list(infos)    # Lista de informações brutas
         self.alg = None             # Algoritmo selecionado pelo usuário
         self.frac = None            # Fração da CPU que cada processo terá controle 
@@ -21,7 +25,10 @@ class Escalonador:                  #Criação do objeto Escalonador
 
         self.DevManager = DeviceManager()
 
-    def initialize(self): # Lê o arquivo de entrada e cria todos componentes necessários
+    def initialize(self): 
+        '''
+            Função que lê o arquivo de entrada e cria todos Objetos Processos e Dispositivos com suas devidas informações. Além de criar o MemoryManager
+        '''
         self.alg, self.frac,self.politic, self.memSize, self.framePageSize, self.alocPerc, self.numDevices = self.infos[0].split("|") 
         self.numDevices = int(self.numDevices)
         self.frac = int(self.frac)
@@ -43,9 +50,12 @@ class Escalonador:                  #Criação do objeto Escalonador
             self.tempoex.append(newprocess.exectime) # Insere o tempo de execução desse novo Processo na lista tempo de execução
 
     def step_forward(self): # Baseado no quantum do sistema
-
+        '''
+            Função principal do Escalonador, executa um passo para frente. O máximo que um passo pode ter de tamanho de clock é a
+            fração de cpu, porém ele pode executar menos caso o processo se bloqueie.
+        '''
         # Atualizar processos prontos e bloqueados
-        self.verify_process()
+        self.update_processes()
         
 
         self.actual_process = self.alternanciaCircular()
@@ -54,45 +64,46 @@ class Escalonador:                  #Criação do objeto Escalonador
         if self.actual_process:
             # Execução do Processos
             
-
             time_to_exec = self.frac
             block = False
             # Verificar se o processo irá pedir E/S
             if random.random() < self.actual_process.ask_es_chance:
-                # Se pedir, quando? Processo executa até ser pedido e se bloqueia. O clock avança apenas o necessário
                 time_to_exec = random.randint(0, self.frac) # Momento da fração que pedira, ao fim dela o dispositivo será acessado
                 block = True
                 
                 
+            # Executa todos dispositvos que estão em uso
             self.DevManager.execute_devices(time_to_exec, self.clock)
 
-            dev_id = self.DevManager.random_device() # Retorna o id de um objeto Device aleatório
-            self.DevManager.acess_device(dev_id, self.actual_process)
+            if block:   # Se teve uma chamada de E/S do processo faz o acesso a um dispositivo aleatório
+                dev_id = self.DevManager.random_device() # Retorna o id de um objeto Device aleatório
+                self.DevManager.acess_device(dev_id, self.actual_process)
 
 
             # Acessar a próxima página do processo
             if time_to_exec > 0 and self.actual_process.next_acess_idx < len(self.actual_process.acess_page_order):
                 self.memManager.page_alloc(self.actual_process, self.actual_process.get_next_page())
 
-            
-            # Caso não peça, apenas executar o quantum do Processo exigido. 
+        
             # Executar o Processo adicionando tempo de Execução
         
             clock =+ self.actual_process.execute(time_to_exec, self.clock, block) # A função execute retorna o tempo que o processo executou
-            #print(clock)
             self.clock += clock
 
             
-        else:
+        elif self.are_processes_remaining(): # Caso não tenha processos prontos mas tenha processos bloqueados
             self.DevManager.execute_devices(1, self.clock)
             self.clock += 1
-
-            
-        # Execução dos Dispositivos
-
+        else:
+            print("Todos processos finalizados, nada para executar")
 
 
-    def alternanciaCircular(self) -> Process: # Retorna a ordem em que os processos serão executados
+
+
+    def alternanciaCircular(self) -> Process: 
+        '''
+            Algoritmos de escalonamento Alternancia Circular. Executa o primeiro da fila e coloca ele no final da fila.
+        '''
 
         # Verifica os processos que estão prontos e não estão na fila
         for process in self.processes:
@@ -109,11 +120,21 @@ class Escalonador:                  #Criação do objeto Escalonador
             self.last_process = process_to_be_executed
             return process_to_be_executed
         return None
-        #Seleciona o primeiro, executa por um tempo e coloca no fim da fila
 
-            
+        
+    def are_processes_remaining(self) -> bool:
+        '''
+            Função que verifica se ainda tem algum processo que não está concluído
+        '''
+        for process in self.processes:
+            if not process.is_done():
+                return True
+        return False
 
-    def verify_process(self):
+    def update_processes(self):
+        '''
+            Atualiza os processos que estão bloqueados ou que não foram iniciados ainda
+        '''
         self.ready = []
         for process in self.processes:
             if process.is_ready() or process.can_start(self.clock):

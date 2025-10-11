@@ -22,7 +22,7 @@ class Device:
             # É necessário registrar quantas vezes o dispositivo foi acessado
             # É necessário registrar em que momentos ele é finalizado sua execução
 
-    def acess(self, process: Process):
+    def acess(self, process: Process) -> None:
         '''
             Função para acessar o dispositivo. Adiciona o dispositivo a lista de processos usando o dispositivo se não tiver ultrapassado
             o máximo de ussos simultâneos. Caso tenha, entra na fila de espera.
@@ -36,7 +36,7 @@ class Device:
             self.device_queue.append(process)
         
     
-    def is_done(self, process: Process): 
+    def is_done(self, process: Process) -> bool: 
         '''
             Função que verifica se o processo já acabou de usar o dispositivo.
             args:
@@ -45,7 +45,7 @@ class Device:
         exec_idx = self.process_using.index(process)
         return True if self.alreadyExec_queue[exec_idx] >= self.opTime else False
     
-    def remove_process(self, process):
+    def remove_process(self, process) -> None:
         '''
             Função que remove um processo das estruturas de controle
             args:
