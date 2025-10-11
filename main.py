@@ -1,5 +1,8 @@
+# Chamada dos componentes do SO
 from src.Escalonador import Escalonador
 from UI.Simulator import SimuladorUI
+
+# Chamadas para Interface Gráfica com PyQT
 import sys
 from PyQt6.QtWidgets import (
     QApplication, QWidget, QVBoxLayout, QHBoxLayout, QGridLayout,
@@ -16,9 +19,12 @@ if __name__ == '__main__':
 
     app = QApplication(sys.argv)
     
-    escal = Escalonador(infos)   
+    # Cria o objeto escalonador
+    escal = Escalonador(infos) 
+    # Inicializa oo Escalonador  
     escal.initialize()
     
+    # Cria e mostra a Interface
     janela_simulador = SimuladorUI(escal)
     janela_simulador.show()
     

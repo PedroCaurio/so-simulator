@@ -8,6 +8,9 @@ from src.Escalonador import  Escalonador
 
 class SimuladorUI(QWidget):
     def __init__(self, escalonador: Escalonador):
+        '''
+            Classe que herda QWidget do PYQT para a organização da interface gráfica
+        '''
         super().__init__()
         self.escalonador = escalonador # Armazena uma referência ao objeto escalonador
 
@@ -39,16 +42,15 @@ class SimuladorUI(QWidget):
         layout_devices.addWidget(QLabel("Dispositivos:"))
         layout_devices.addWidget(self.devices_list)
         
-        self.botao_passo = QPushButton("Executar Próximo Passo")
 
-        # 1. Criamos o QGridLayout
+        # QGridLayout para Molduras
         self.layout_memoria_grid = QGridLayout()
         self.labels_memoria = [] # Lista para guardar os labels de conteúdo
         
-        num_linhas = 2
+        # Número máximo de Colunas arbitrário 10
         num_colunas = 10
         
-        for i in range(20):
+        for i in range(20): # Número máximo de Molduras arbitrário
             # Cria a "célula" que terá a borda
             celula_frame = QFrame()
             celula_frame.setFrameShape(QFrame.Shape.StyledPanel)
@@ -90,12 +92,12 @@ class SimuladorUI(QWidget):
         layout_geral.addWidget(self.label_clock, alignment=Qt.AlignmentFlag.AlignCenter)
         layout_geral.addLayout(layout_principal)
         layout_geral.addLayout(self.layout_memoria_grid)
-        layout_geral.addWidget(self.botao_passo)
+        layout_geral.addWidget(self.step_button)
 
         self.setLayout(layout_geral)
 
         # --- Conectar Sinais e Slots ---
-        self.botao_passo.clicked.connect(self.executar_passo_e_atualizar)
+        self.step_button.clicked.connect(self.executar_passo_e_atualizar)
 
     def executar_passo_e_atualizar(self):
         """Este é o nosso SLOT."""
