@@ -63,14 +63,14 @@ O simulador implementa os seguintes conceitos:
 [ ] - Verificar variáveis de memória para serem multiplos de 2
 
 ### Documentação
-[ ] - Escalonador
+[x] - Escalonador
 
-[ ] - Main
+[x] - Main
 
-[ ] - Device
+[x] - Device
 
-[ ] - DeviceManager
+[x] - DeviceManager
 
-[ ] - MemoryManager
+[x] - MemoryManager
 
-[ ] - Process
+[x] - Process
