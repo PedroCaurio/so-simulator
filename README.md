@@ -43,9 +43,9 @@ O simulador implementa os seguintes conceitos:
 
 [ ] - Inserir cores nas variáveis de memória para visualizar page hits, substituições e inserções
 
-[ ] - Permitir visualização das Tabeles de Páginas dos processos
+[ ] - Permitir visualização das Tabelas de Páginas dos processos
 
-[ ] - Permitir visualização da fila de processos que querem acessas um dispositivo
+[ ] - Permitir visualização da fila de processos que querem acessar um dispositivo
 
 [ ] - Aumentar o tamanho dos widgets para evitar o redimensionamento
 
