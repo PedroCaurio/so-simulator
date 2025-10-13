@@ -60,7 +60,7 @@ O simulador implementa os seguintes conceitos:
 [ ] - Adicionar outras políticas
 
 ### Gerador Entrada
-[ ] - Verificar variáveis de memória para serem multiplos de 2
+[X] - Verificar variáveis de memória para serem potencias de 2
 
 ### Documentação
 [x] - Escalonador
