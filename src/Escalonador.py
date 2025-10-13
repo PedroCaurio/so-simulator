@@ -77,7 +77,7 @@ class Escalonador:                  #Criação do objeto Escalonador
 
             if block:   # Se teve uma chamada de E/S do processo faz o acesso a um dispositivo aleatório
                 dev_id = self.DevManager.random_device() # Retorna o id de um objeto Device aleatório
-                self.DevManager.acess_device(dev_id, self.actual_process)
+                self.DevManager.access_device(dev_id, self.actual_process)
 
 
             # Acessar a próxima página do processo
