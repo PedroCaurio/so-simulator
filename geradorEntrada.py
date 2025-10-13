@@ -15,11 +15,11 @@ if __name__ == "__main__":
         raise ValueError
     print("Informe o tamanho da memória principal em bytes")
     tamMemPrincipal = int(input())
-    if tamMemPrincipal & 1 != 0:
+    if tamMemPrincipal > 0 and (tamMemPrincipal & (tamMemPrincipal - 1)) != 0:
         raise ValueError
     print("Informe o tamanho das páginas/molduras")
     tamPagMold = int(input())
-    if tamPagMold & 1 != 0:
+    if tamPagMold > 0 and (tamPagMold & (tamPagMold - 1)) != 0:
         raise ValueError
     print("Informe o percentual máximo de alocação de memória dos processos")
     alocMem = int(input())
