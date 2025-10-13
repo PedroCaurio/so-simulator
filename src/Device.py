@@ -29,6 +29,7 @@ class Device:
             arg:
                 process: Objeto Process que deseja usar o dispositivo
         '''
+        print(len(self.process_using), self.simUses)
         if len(self.process_using) < self.simUses:
             self.process_using.append(process)
             self.alreadyExec_queue.append(0)
@@ -60,11 +61,15 @@ class Device:
             Função que constrói uma representação em texto do objeto Device. Ela é usada na interface gráfica para mostrar o estado do dispositivo
         '''
         pids = []
+        queue = []
         text = ""
+        for process in self.device_queue:
+            queue.append(process.pid)
         for process in self.process_using:
             pids.append(process.pid)
         for pid in pids:
             text += f"PID:{pid} - EXECUÇÃO: {self.alreadyExec_queue[pids.index(pid)]}/{self.opTime} |"
+        text += f"Fila: {queue}"
         return text
 
     def execute(self, n:int, current_clock: int) -> None:

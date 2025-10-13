@@ -32,6 +32,8 @@ class DeviceManager:
         for dev in self.devices:
             for process in dev.process_using:
                 ret[process.pid] = dev.id
+            for process in dev.device_queue:
+                ret[process.pid] = dev.id
         return ret
 
 
