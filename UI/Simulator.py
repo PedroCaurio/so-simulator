@@ -1,10 +1,19 @@
 import sys
 from PyQt6.QtWidgets import (
     QApplication, QWidget, QVBoxLayout, QHBoxLayout, QGridLayout,
-    QLabel, QPushButton, QListWidget, QFrame
+    QLabel, QPushButton, QListWidget, QFrame, QListWidgetItem
 )
+from PyQt6.QtGui import QColor, QBrush
 from PyQt6.QtCore import Qt
 from src.Escalonador import  Escalonador
+
+STATE_COLORS = {
+    "Concluido": "grey",
+    "Pronto": "transparent",
+    "Executando": "green",
+    "Bloqueado": "red",
+    "Nao Iniciado": "transparent"
+}
 
 class SimuladorUI(QWidget):
     def __init__(self, escalonador: Escalonador):
@@ -109,7 +118,10 @@ class SimuladorUI(QWidget):
         
         self.process_list.clear()
         for process in self.escalonador.processes:
-            self.process_list.addItem(f"{process.pid} : {process.state} - {process.alreadyexec}/{process.exectime}")
+            item_text = f"{process.pid} : {process.state} - {process.alreadyexec}/{process.exectime}"
+            item = QListWidgetItem(item_text)
+            item.setBackground(QBrush(QColor(STATE_COLORS[process.state])))
+            self.process_list.addItem(item)
         self.label_clock.setText(f"Clock: {self.escalonador.clock}")
 
         self.devices_list.clear()
