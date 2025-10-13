@@ -3,6 +3,7 @@ from PyQt6.QtWidgets import (
     QApplication, QWidget, QVBoxLayout, QHBoxLayout, QGridLayout,
     QLabel, QPushButton, QListWidget, QFrame, QListWidgetItem
 )
+from PyQt6.QtCore import QTimer
 from PyQt6.QtGui import QColor, QBrush
 from PyQt6.QtCore import Qt
 from src.Escalonador import  Escalonador
@@ -106,7 +107,21 @@ class SimuladorUI(QWidget):
         self.setLayout(layout_geral)
 
         # --- Conectar Sinais e Slots ---
+        self.hold_timer = QTimer(self)
+        self.hold_timer.setInterval(200)
+        self.hold_timer.timeout.connect(self.executar_passo_e_atualizar)
+
         self.step_button.clicked.connect(self.executar_passo_e_atualizar)
+        self.step_button.pressed.connect(self.iniciar_segurar_botao)
+        self.step_button.released.connect(self.parar_segurar_botao)
+
+
+    def iniciar_segurar_botao(self):
+        if not self.hold_timer.isActive():
+            self.hold_timer.start()
+
+    def parar_segurar_botao(self):
+        self.hold_timer.stop()
 
     def executar_passo_e_atualizar(self):
         """Este é o nosso SLOT."""
