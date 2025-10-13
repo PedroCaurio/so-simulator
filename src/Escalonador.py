@@ -87,7 +87,7 @@ class Escalonador:                  #Criação do objeto Escalonador
         
             # Executar o Processo adicionando tempo de Execução
         
-            clock =+ self.actual_process.execute(time_to_exec, self.clock, block) # A função execute retorna o tempo que o processo executou
+            clock = self.actual_process.execute(time_to_exec, self.clock, block) # A função execute retorna o tempo que o processo executou
             self.clock += clock
 
             
