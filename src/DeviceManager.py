@@ -7,7 +7,7 @@ class DeviceManager:
         '''
             Essa classe faz o controle dos dispositivos, seus acessos e execuções
         '''
-        self.devices = []
+        self.devices: list[Device] = []
         
     def add_device(self, id: int, simultaneous_uses: int, operation_time: int) -> None:
         '''
@@ -24,7 +24,7 @@ class DeviceManager:
             return dev.id
         return None
     
-    def acessing(self) -> dict: 
+    def accessing(self) -> dict: 
         '''
             Função que associa os processos com os dispositivos que estão sendo usados. Retornando um dicionário com pares {pid, id}.
         '''
@@ -35,13 +35,13 @@ class DeviceManager:
         return ret
 
 
-    def acess_device(self, id: int, process: Process) -> bool:
+    def access_device(self, id: int, process: Process) -> bool:
         '''
             Acessa o dispositivo associado com o 'id'
         '''
         for dev in self.devices:
             if dev.id == id:
-                dev.acess(process)
+                dev.access(process)
                 return True
         return False
     
