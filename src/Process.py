@@ -1,7 +1,7 @@
 from collections import deque
 
 class Process:                              
-    def __init__(self, beggining: int, pid: int, exectime: int, priority: int , memory: int, sequence_acess_page: str, e_s_chance: float):
+    def __init__(self, beggining: int, pid: int, exectime: int, priority: int , memory: int, sequence_access_page: str, e_s_chance: float):
         '''
             Classe que simula um processo
         '''
@@ -19,8 +19,8 @@ class Process:
         # VARIÁVEIS DE MEMÓRIA
         self.memory = memory
         self.pages_table = {}               # {num_pag: num_moldura}
-        self.acess_page_order = list(map(int, sequence_acess_page.split(' '))) if sequence_acess_page else []
-        self.next_acess_idx = 0
+        self.access_page_order = list(map(int, sequence_access_page.split(' '))) if sequence_access_page else []
+        self.next_access_idx = 0
         self.queue_fifo = deque()
 
         # VARIÁVEIS DE E/S
@@ -30,8 +30,8 @@ class Process:
             Função que retorna a próxima página que deve ser acessada
         '''
         # ARRUMAR: ESSA FUNÇÃO PODE RETORNAR UM VALOR FORA DO RANGE
-        page_number = self.acess_page_order[self.next_acess_idx]
-        self.next_acess_idx += 1
+        page_number = self.access_page_order[self.next_access_idx]
+        self.next_access_idx += 1
         return page_number
     
     #########################

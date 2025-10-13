@@ -81,7 +81,7 @@ class Escalonador:                  #Criação do objeto Escalonador
 
 
             # Acessar a próxima página do processo
-            if time_to_exec > 0 and self.actual_process.next_acess_idx < len(self.actual_process.acess_page_order):
+            if time_to_exec > 0 and self.actual_process.next_access_idx < len(self.actual_process.access_page_order):
                 self.memManager.page_alloc(self.actual_process, self.actual_process.get_next_page())
 
         
@@ -140,6 +140,6 @@ class Escalonador:                  #Criação do objeto Escalonador
             if process.is_ready() or process.can_start(self.clock):
                 self.ready.append(process)
             elif process.is_blocked():
-                process_device_dict = self.DevManager.acessing() #{process_pid : dev.id}
+                process_device_dict = self.DevManager.accessing() #{process_pid : dev.id}
                 if process.pid not in process_device_dict:
                     process.make_ready()

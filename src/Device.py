@@ -22,7 +22,7 @@ class Device:
             # É necessário registrar quantas vezes o dispositivo foi acessado
             # É necessário registrar em que momentos ele é finalizado sua execução
 
-    def acess(self, process: Process) -> None:
+    def access(self, process: Process) -> None:
         '''
             Função para acessar o dispositivo. Adiciona o dispositivo a lista de processos usando o dispositivo se não tiver ultrapassado
             o máximo de ussos simultâneos. Caso tenha, entra na fila de espera.
